@@ -1,4 +1,5 @@
 import puppeteer from 'puppeteer';
+
 interface INews {
 	date: string,
 	title: string,
@@ -17,7 +18,9 @@ const info = async () => {
 		const titleSelector = document.querySelectorAll('.mini-news-wrapper > a > .info > .title');
 		const imageSelector = document.querySelectorAll('.mini-news-wrapper > a > .image > img');
 		const linkSelector = document.querySelectorAll('.mini-news-wrapper > a');
+
 		let posts: INews[] = [];
+
 		for (let i = 0; i < 5; i++)
 			posts.push({
 				date: dateSelector[i].innerHTML,
@@ -25,7 +28,8 @@ const info = async () => {
 				link: linkSelector[i].getAttribute('href'),
 				urlImage: imageSelector[i].getAttribute('src')
 			});
-		return Object.assign({}, posts);
+
+		return posts;
 	});
 
 	await browser.close();

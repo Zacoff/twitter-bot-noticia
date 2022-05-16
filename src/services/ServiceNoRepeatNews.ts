@@ -1,18 +1,27 @@
-import { selectNew } from "../db/config";
+import { storage } from '../db/storage';
 
 interface NewsI {
-    date: string,
-	title: string,
-	link: string,
-	urlImage: string
+	date: string;
+	title: string;
+	link: string;
+	urlImage: string;
 }
 
 export class ServiceNoRepeatNews {
-    static verify(news : NewsI[]) {
-        /*for (let i = 0; i < news.length; i++) {
-            const alreadyPosted = selectNew(news[i].title, news[i].date);
-            if(alreadyPosted.all.length) news.splice(i, 1);            
-        }*/
-        return true
-    }
+	static verify(news: NewsI[]) {
+		let verifyedNews: NewsI[] = [];
+
+		news.map((obj) => {
+			if (!storage.includes(obj.title)) {
+				verifyedNews.push(obj);
+			}
+			return;
+		});
+
+		if (verifyedNews.length === 0) {
+			return 'Nao ha noticias novas...';
+		}
+
+		return verifyedNews;
+	}
 }

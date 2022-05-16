@@ -1,3 +1,3 @@
-import ControllerPrefeituraResende from "./controllers/ControllerPrefeituraResende";
+import ControllerPrefeituraResende from './controllers/ControllerPrefeituraResende';
 
-ControllerPrefeituraResende.getNews()
+ControllerPrefeituraResende.getNews();
