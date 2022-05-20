@@ -6,6 +6,6 @@ export default class ControllerPrefeituraResende {
 		const info = await infoResendeSaude();
 		const verifyedNews = ServiceNoRepeatNews.verify(info);
 
-		console.log(verifyedNews);
+		return verifyedNews;
 	}
 }
