@@ -1,18 +1,22 @@
-import { storage } from '../db/storage';
+import { storageNews } from '../db/storage';
 
 interface NewsI {
 	date: string;
 	title: string;
 	link: string;
-	urlImage: string;
 }
 
 export class ServiceNoRepeatNews {
 	static verify(news: NewsI[]) {
 		let verifyedNews: NewsI[] = [];
-
 		news.map((obj) => {
-			if (!storage.includes(obj.title)) {
+			if (!storageNews.includes(obj.title)) {
+				const regex = /.*(?=&nbsp)/gi;
+				const validTitle = obj.title.match(regex);
+
+				if (validTitle !== null) obj.title = validTitle[0];
+
+				console.log(obj);
 				verifyedNews.push(obj);
 			}
 			return;

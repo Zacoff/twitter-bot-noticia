@@ -4,7 +4,6 @@ interface INews {
 	date: string,
 	title: string,
 	link: string,
-	urlImage: string
 }
 
 const info = async () => {
@@ -16,7 +15,6 @@ const info = async () => {
 	const postsInformation = await page.evaluate(() => {
 		const dateSelector = document.querySelectorAll('.mini-news-wrapper > a > .info > .date');
 		const titleSelector = document.querySelectorAll('.mini-news-wrapper > a > .info > .title');
-		const imageSelector = document.querySelectorAll('.mini-news-wrapper > a > .image > img');
 		const linkSelector = document.querySelectorAll('.mini-news-wrapper > a');
 
 		let posts: INews[] = [];
@@ -25,8 +23,7 @@ const info = async () => {
 			posts.push({
 				date: dateSelector[i].innerHTML,
 				title: titleSelector[i].innerHTML,
-				link: linkSelector[i].getAttribute('href'),
-				urlImage: imageSelector[i].getAttribute('src')
+				link: linkSelector[i].getAttribute('href')
 			});
 
 		return posts;
